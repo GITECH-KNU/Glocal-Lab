@@ -24,6 +24,13 @@
 - **연구실 구성원 변경**: `data/members-data.js` → 해당 교수의 `members` 배열을 수정합니다.
   `role` 값은 `postdoc`, `phd`, `integrated`, `ms`, `ug`, `intern`, `staff` 중 하나입니다.
 - **갤러리 사진 추가**: `assets/gallery/`에 사진을 넣고 `data/site-data.js` → `gallery`에 항목을 추가합니다.
+- **사진 권장 크기** (작은 사진은 고해상도 화면에서 흐리게 보입니다): 교수 프로필 600×750px 이상(배경 통일 권장),
+  갤러리·건물 사진 가로 1200px 이상, 장비 사진 가로 800px 이상, 메인 배경(`hero-cover.jpg`) 가로 2400px 이상.
+  같은 파일 이름으로 바꿔 넣으면 그대로 반영됩니다.
+- **사업 단계 일정**: `data/site-data.js` → `meta.phases` (사업 개요의 추진 일정 그래프와 ‘현재’ 표시에 사용).
+- **협력 기관**: `data/site-data.js` → `partners` – `type`(연구기관·대학·기업), 해외 기관은 `country`,
+  로고가 있으면 `logo: 'assets/logos/파일명.png'`을 넣으면 아이콘 대신 로고가 나옵니다.
+- **공유 미리보기 이미지**: `assets/og-image.jpg` (1200×630). 사이트 주소가 바뀌면 `index.html`의 `og:url`·`og:image` 주소도 바꿉니다.
 
 ## 페이지
 

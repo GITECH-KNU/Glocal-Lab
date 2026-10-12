@@ -13,6 +13,12 @@ window.SITE_DATA = {
     mission: '고급인재양성을 통한 친환경 모빌리티 주행거리 극대화 융합 핵심기술 개발 및 글로벌 R&D 플랫폼 구축',
     pi: '이동경 (국립공주대학교)',
     period: '2026.09 – 2035.08 (3단계, 9년)',
+    /* 단계별 일정 (사업 개요의 추진 일정 그래프) – start/end는 'YYYY.MM' */
+    phases: [
+      { name: '1단계', start: '2026.09', end: '2029.08' },
+      { name: '2단계', start: '2029.09', end: '2032.08' },
+      { name: '3단계', start: '2032.09', end: '2035.08' }
+    ],
     host: '국립공주대학교 글로벌생산제조기술연구소',
     copyright: '© 2026 GITECH · 국립공주대학교 글로벌생산제조기술연구소. All rights reserved.'
   },
@@ -65,12 +71,6 @@ window.SITE_DATA = {
       region: '충남 제조기업 기술지원 및 공동연구, 모빌리티연구소 및 글로벌 대학과 협력 네트워크 구축',
       projects: ['글로컬대학30 (미래모빌리티 분야 포함)', 'RISE 사업 (미래모빌리티)', 'BK21 (친환경 미래자동차 소재·부품·공정)', '모빌리티 관련 과기부/산자부/교육부 사업'],
       regional: ['DSC 공유대학 구축 및 운영 (모빌리티 소부장 개발) – 학생 191명 · 9개 기업 매칭'],
-      history: [
-        { year: '2022–2023', head: '초대 소장 이동경 교수' },
-        { year: '2024', head: '2대 소장 신중한 교수' },
-        { year: '2025', head: '3대 소장 김현철 교수' },
-        { year: '2026', head: '4대 소장 이동경 교수' }
-      ],
     },
     {
       id: 'hanbat',
@@ -101,7 +101,6 @@ window.SITE_DATA = {
       region: '소재·부품 기업 협력 플랫폼 운영, 대전 특구 출연연과 연계한 모듈 부품 공동연구',
       projects: ['ICT 혁신인재 4.0 스마트자동차 교육연구사업', 'DSC 공유대학사업 (자동차 전장제어)', '스마트제조 고급인력양성사업'],
       regional: ['대전산단 부품기업 대상 3D 프린팅 및 제조 공정 지원', '스마트광학 혁신사업 (광학부품 제조 지원)'],
-      history: [],
     },
     {
       id: 'kaist',
@@ -132,7 +131,6 @@ window.SITE_DATA = {
       region: '모빌리티 기업 및 연구기관 협력, 제주도 지원 모빌리티 실증 연구수행',
       projects: ['국토부(친환경 모빌리티) · 산자부(모빌리티 지능제어) · 중기부(모빌리티 서비스) 국책과제 수행', '제주도 지원 모빌리티 실증연구 수행'],
       regional: ['누적 44개 기업 유치·지원'],
-      history: [],
     }
   ],
 
@@ -159,10 +157,14 @@ window.SITE_DATA = {
     { id: 'ha-jihwan', name: '하지환', inst: 'hanbat', team: 'M',
       field: '마이크로/나노 가공 및 생산, 복합소재',
       pubs: [{ journal: 'Advanced Functional Materials', year: 2024, if: 18.5, jcr: 'Top 4.1%' }, { journal: 'Advanced Functional Materials', year: 2026, if: 19.0, jcr: 'Top 4.5%' }] },
-    { id: 'lee-hocheol', name: '이호철', inst: 'hanbat', team: 'M', field: '초정밀 가공 및 광기계 설계', pubs: [] },
-    { id: 'park-seongyeon', name: '박성연', inst: 'hanbat', team: 'M', field: '첨단 복합재료 응용 설계 및 반도체 패키징', pubs: [] },
-    { id: 'oh-seungtae', name: '오승태', inst: 'knu', team: 'M', field: '마이크로/나노 표면 개질 기반 차세대 열관리 및 상변화 열전달', pubs: [] },
-    { id: 'pyo-jaebum', name: '표재범', inst: 'knu', team: 'M', field: '박막 재료의 기계적 거동·신뢰성 평가 및 생산기술', pubs: [] },
+    { id: 'lee-hocheol', name: '이호철', inst: 'hanbat', team: 'M', field: '초정밀 가공 및 광기계 설계',
+      pubs: [{ journal: 'International Journal of Precision Engineering and Manufacturing', year: 2025 }, { journal: 'Current Optics and Photonics', year: 2024 }] },
+    { id: 'park-seongyeon', name: '박성연', inst: 'hanbat', team: 'M', field: '첨단 복합재료 응용 설계 및 반도체 패키징',
+      pubs: [{ journal: 'Advanced Functional Materials', year: 2026 }, { journal: 'Composite Structures', year: 2026 }] },
+    { id: 'oh-seungtae', name: '오승태', inst: 'knu', team: 'M', field: '마이크로/나노 표면 개질 기반 차세대 열관리 및 상변화 열전달',
+      pubs: [{ journal: 'Nano Energy', year: 2024 }, { journal: 'Advanced Science', year: 2022 }] },
+    { id: 'pyo-jaebum', name: '표재범', inst: 'knu', team: 'M', field: '박막 재료의 기계적 거동·신뢰성 평가 및 생산기술',
+      pubs: [{ journal: 'Carbon Energy', year: 2025 }, { journal: 'Scientific Reports', year: 2026 }] },
     { id: 'kim-beomju', name: '김범주', inst: 'knu', team: 'P',
       field: '이온교환막 및 유체역학',
       pubs: [{ journal: 'Journal of Membrane Science', year: 2025, if: 9.0, jcr: 'Top 4.9%' }, { journal: 'Journal of Membrane Science', year: 2024, if: 9.0, jcr: 'Top 4.9%' }] },
@@ -178,9 +180,12 @@ window.SITE_DATA = {
     { id: 'park-kibeom', name: '박기범', inst: 'kaist', team: 'P',
       field: '전기추진 모빌리티 전력변환 및 에너지 시스템',
       pubs: [{ journal: 'IEEE/ASME Transactions on Mechatronics', year: 2025, if: 7.3, jcr: 'Top 4.1%' }, { journal: 'IEEE Transactions on Power Electronics', year: 2025, if: 6.5, jcr: 'Top 11.8%' }] },
-    { id: 'jeong-gileon', name: '정길언', inst: 'hanbat', team: 'P', field: '인공지능 기반 구조해석 및 최적설계', pubs: [] },
-    { id: 'kim-jiseok', name: '김지석', inst: 'hanbat', team: 'P', field: '에너지 하베스팅 및 동적 에너지 변환 시스템', pubs: [] },
-    { id: 'seo-junyong', name: '서준용', inst: 'knu', team: 'P', field: '컴퓨팅 기반 열전달 해석 및 열관리 시스템 최적설계', pubs: [] },
+    { id: 'jeong-gileon', name: '정길언', inst: 'hanbat', team: 'P', field: '인공지능 기반 구조해석 및 최적설계',
+      pubs: [{ journal: 'Nuclear Engineering and Technology', year: 2026 }, { journal: 'Journal of Electronic Packaging', year: 2026 }] },
+    { id: 'kim-jiseok', name: '김지석', inst: 'hanbat', team: 'P', field: '에너지 하베스팅 및 동적 에너지 변환 시스템',
+      pubs: [{ journal: 'Advanced Science', year: 2026 }, { journal: 'Advanced Functional Materials', year: 2026 }] },
+    { id: 'seo-junyong', name: '서준용', inst: 'knu', team: 'P', field: '컴퓨팅 기반 열전달 해석 및 열관리 시스템 최적설계',
+      pubs: [{ journal: 'Advanced Materials', year: 2025 }, { journal: 'International Journal of Heat and Mass Transfer', year: 2026 }] },
     { id: 'choi-kyunghwan', name: '최경환', inst: 'kaist', team: 'I', role: '친환경스마트자동차연구센터 소장',
       field: '모빌리티 통합 제어 · 부품–차량–편대 수준의 지능제어',
       pubs: [{ journal: 'IEEE/ASME Transactions on Mechatronics', year: 2025, if: 7.3, jcr: 'Top 4.1%' }, { journal: 'IEEE Transactions on Intelligent Transportation Systems', year: 2024, if: 8.4, jcr: 'Top 2.4%' }] },
@@ -199,7 +204,8 @@ window.SITE_DATA = {
     { id: 'jang-inkwon', name: '장인권', inst: 'kaist', team: 'I',
       field: '전산해석 및 인공지능에 기반한 모빌리티 시스템 설계',
       pubs: [{ journal: 'Expert Systems with Applications', year: 2025, if: 7.5, jcr: 'Top 6.1%' }, { journal: 'IEEE Transactions on Intelligent Transportation Systems', year: 2023, if: 8.4, jcr: 'Top 2.4%' }] },
-    { id: 'lee-changyu', name: '이찬규', inst: 'knu', team: 'I', field: '자율이동체의 안전 보장 최적화·학습 기반 경로계획 및 제어', pubs: [] }
+    { id: 'lee-changyu', name: '이찬규', inst: 'knu', team: 'I', field: '자율이동체의 안전 보장 최적화·학습 기반 경로계획 및 제어',
+      pubs: [{ journal: 'IEEE Transactions on Control Systems Technology', year: 2026 }, { journal: 'Mechatronics', year: 2026 }] }
   ],
 
   /* 3대 연구 분야 */
@@ -210,9 +216,19 @@ window.SITE_DATA = {
   ],
 
   /* 협력 기관 – 협약(MOU) 체결 기관명만 표기 */
+  /* 협력 기관 – type: 연구기관 · 대학 · 기업 / country: 해외 기관 국가 / logo: 로고 파일 경로(선택) */
   partners: {
-    domestic: ['한국자동차연구원', '한국기계연구원', '한국기술교육대학교', 'LS 일렉트릭', '카카오모빌리티'],
-    global: ['University of Nebraska–Lincoln', 'Boston University']
+    domestic: [
+      { name: '한국자동차연구원', type: '연구기관' },
+      { name: '한국기계연구원', type: '연구기관' },
+      { name: '한국기술교육대학교', type: '대학' },
+      { name: 'LS 일렉트릭', type: '기업' },
+      { name: '카카오모빌리티', type: '기업' }
+    ],
+    global: [
+      { name: 'University of Nebraska–Lincoln', type: '대학', country: '미국' },
+      { name: 'Boston University', type: '대학', country: '미국' }
+    ]
   },
 
   /* 최근 성과 */

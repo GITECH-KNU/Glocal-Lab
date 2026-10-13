@@ -24,6 +24,9 @@
 - **연구실 구성원 변경**: `data/members-data.js` → 해당 교수의 `members` 배열을 수정합니다.
   `role` 값은 `postdoc`, `phd`, `integrated`, `ms`, `ug`, `intern`, `staff` 중 하나입니다.
 - **갤러리 사진 추가**: `assets/gallery/`에 사진을 넣고 `data/site-data.js` → `gallery`에 항목을 추가합니다.
+- **협력 기관 추가**: `data/site-data.js` → `partners`에 한 줄을 추가합니다. `group`은 `na`(북미), `eu`(유럽), `asia`(아시아),
+  `kr`(국내 대학·연구기관), `corp`(국내 기업) 중 하나이고, `deals`에 `['MOU', 2026, '비고']`처럼 협약을 적습니다.
+  로고는 `assets/partners/`에 넣고 `logo`에 경로를 적습니다(없으면 이니셜 배지로 표시, 흰 바탕에서 잘 보이는 SVG·PNG 권장).
 - **사진 권장 크기** (작은 사진은 고해상도 화면에서 흐리게 보입니다): 교수 프로필 600×750px 이상(배경 통일 권장),
   갤러리·건물 사진 가로 1200px 이상, 장비 사진 가로 800px 이상, 메인 배경(`hero-cover.jpg`) 가로 2400px 이상.
   같은 파일 이름으로 바꿔 넣으면 그대로 반영됩니다.

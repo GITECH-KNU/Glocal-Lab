@@ -215,21 +215,39 @@ window.SITE_DATA = {
     { id: 'I', name: '지능제어', en: 'Intelligent Control', inst: 'kaist' }
   ],
 
-  /* 협력 기관 – 협약(MOU) 체결 기관명만 표기 */
-  /* 협력 기관 – type: 연구기관 · 대학 · 기업 / country: 해외 기관 국가 / logo: 로고 파일 경로(선택) */
-  partners: {
-    domestic: [
-      { name: '한국자동차연구원', type: '연구기관' },
-      { name: '한국기계연구원', type: '연구기관' },
-      { name: '한국기술교육대학교', type: '대학' },
-      { name: 'LS 일렉트릭', type: '기업' },
-      { name: '카카오모빌리티', type: '기업' }
-    ],
-    global: [
-      { name: 'University of Nebraska–Lincoln', type: '대학', country: '미국' },
-      { name: 'Boston University', type: '대학', country: '미국' }
-    ]
-  },
+  /* 협력 기관 – MOU·LOI 체결 기관
+   * group : na 북미 · eu 유럽 · asia 아시아 · kr 국내 대학·연구기관 · corp 국내 기업
+   * deals : [협약 종류(MOU·LOI), 연도, 비고] – 한 기관과 여러 건이면 여러 줄
+   * logo  : assets/partners/ 로고 파일 (없으면 abbr 또는 이니셜 배지로 표시) · url: 공식 홈페이지 */
+  partners: [
+    { id: 'unl', name: 'University of Nebraska–Lincoln', ko: '네브래스카 링컨 대학교', country: '미국', group: 'na', deals: [['MOU', 2025, '공동박사학위 (Joint Ph.D.)'], ['LOI', 2026, 'Global Joint Research Lab'], ['LOI', 2026]], logo: 'assets/partners/unl.svg', url: 'https://www.unl.edu/' },
+    { id: 'bu', name: 'Boston University', ko: '보스턴 대학교', country: '미국', group: 'na', deals: [['MOU', 2025]], logo: 'assets/partners/bu.svg', url: 'https://www.bu.edu/' },
+    { id: 'ucf', name: 'University of Central Florida', ko: '센트럴플로리다 대학교', country: '미국', group: 'na', deals: [['MOU', 2024]], url: 'https://www.ucf.edu/' },
+    { id: 'ncsu', name: 'North Carolina State University', ko: '노스캐롤라이나 주립대학교', country: '미국', group: 'na', deals: [['MOU', 2025]], logo: 'assets/partners/ncsu.png', url: 'https://www.ncsu.edu/' },
+    { id: 'umdearborn', abbr: 'UM-D', name: 'University of Michigan–Dearborn', ko: '미시간 대학교 디어본', country: '미국', group: 'na', deals: [['LOI', 2026]], logo: 'assets/partners/umdearborn.svg', url: 'https://umdearborn.edu/' },
+    { id: 'lbnl', abbr: 'LBNL', name: 'Lawrence Berkeley National Lab. · UC Berkeley', ko: '로렌스 버클리 국립연구소 · UC 버클리', country: '미국', group: 'na', deals: [['LOI', 2025]], logo: ['assets/partners/lbnl.svg', 'assets/partners/ucberkeley.svg'], url: 'https://www.lbl.gov/' },
+    { id: 'unibo', abbr: 'UNIBO', name: 'University of Bologna', ko: '볼로냐 대학교', country: '이탈리아', group: 'eu', deals: [['MOU', 2024]], note: '외국인 연구생 교류 (2024)', logo: 'assets/partners/unibo.svg', url: 'https://www.unibo.it/' },
+    { id: 'tu-berlin', abbr: 'TU Berlin', name: 'Technische Universität Berlin', ko: '베를린 공과대학교', country: '독일', group: 'eu', deals: [['MOU', 2011]], logo: 'assets/partners/tu-berlin.svg', url: 'https://www.tu.berlin/' },
+    { id: 'cranfield', name: 'Cranfield University', ko: '크랜필드 대학교', country: '영국', group: 'eu', deals: [['MOU', 2025]], logo: 'assets/partners/cranfield.png', url: 'https://www.cranfield.ac.uk/' },
+    { id: 'uwl', name: 'University of West London', ko: '웨스트런던 대학교', country: '영국', group: 'eu', deals: [['LOI', 2026]], logo: 'assets/partners/uwl.svg', url: 'https://www.uwl.ac.uk/' },
+    { id: 'cityu', abbr: 'CityU', name: 'City University of Hong Kong', ko: '홍콩시립대학교', country: '홍콩', group: 'asia', deals: [['MOU', 2026]], logo: 'assets/partners/cityu.svg', url: 'https://www.cityu.edu.hk/' },
+    { id: 'hit', name: 'Harbin Institute of Technology', ko: '하얼빈공업대학', country: '중국', group: 'asia', deals: [['MOU', 2026], ['LOI', 2026]], logo: 'assets/partners/hit.png', url: 'https://www.hit.edu.cn/' },
+    { id: 'swjtu', abbr: 'SWJTU', name: 'Southwest Jiaotong University', ko: '서남교통대학', country: '중국', group: 'asia', deals: [['LOI', 2026]], logo: 'assets/partners/swjtu.svg', url: 'https://www.swjtu.edu.cn/' },
+    { id: 'hust', name: 'Hanoi University of Science and Technology', ko: '하노이 과학기술대학교', country: '베트남', group: 'asia', deals: [['LOI', 2026]], logo: 'assets/partners/hust.png', url: 'https://hust.edu.vn/' },
+    { id: 'manit', abbr: 'MANIT', name: 'Maulana Azad National Institute of Technology', ko: '마울라나 아자드 국립공과대학', country: '인도', group: 'asia', deals: [['LOI', 2026]], logo: 'assets/partners/manit.svg', url: 'https://www.manit.ac.in/' },
+    { id: 'nits', name: 'National Institute of Technology Silchar', ko: '실차르 국립공과대학', country: '인도', group: 'asia', deals: [['LOI', 2026]], logo: 'assets/partners/nits.png', url: 'https://www.nits.ac.in/' },
+    { id: 'amity-punjab', name: 'Amity University Punjab', ko: '아미티 대학교 펀자브', country: '인도', group: 'asia', deals: [['LOI', 2026]], logo: 'assets/partners/amity-punjab.png', url: 'https://mohali.amity.edu/' },
+    { id: 'kaist-mobility', name: 'KAIST 모빌리티연구소', en: 'KAIST Mobility Research Institute', group: 'kr', deals: [['MOU', 2025]], logo: 'assets/logos/kaist.png' },
+    { id: 'kimm', name: '한국기계연구원', en: 'KIMM', group: 'kr', deals: [['MOU', 2026, '광응용장비연구실']], logo: 'assets/partners/kimm.svg', url: 'https://www.kimm.re.kr/' },
+    { id: 'katech', name: '한국자동차연구원', en: 'KATECH', group: 'kr', deals: [['MOU', 2026, '첨단구조소재연구센터']], logo: 'assets/partners/katech.svg', url: 'https://www.katech.re.kr/' },
+    { id: 'kitech', name: '한국생산기술연구원', en: 'KITECH', group: 'kr', deals: [['LOI', 2026]], logo: 'assets/partners/kitech.svg', url: 'https://www.kitech.re.kr/' },
+    { id: 'koreatech', name: '한국기술교육대학교', en: 'KOREATECH', group: 'kr', deals: [['MOU']], logo: 'assets/partners/koreatech.svg', url: 'https://www.koreatech.ac.kr/' },
+    { id: 'kakao-mobility', name: '카카오모빌리티', en: 'Kakao Mobility', group: 'corp', deals: [['MOU', 2024]], logo: 'assets/partners/kakao-mobility.svg', url: 'https://www.kakaomobility.com/' },
+    { id: 'ls-electric', name: 'LS일렉트릭', en: 'LS ELECTRIC', group: 'corp', deals: [['MOU', 2025]], logo: 'assets/partners/ls-electric.svg', url: 'https://www.ls-electric.com/' },
+    { id: 'tmoney-mobility', name: '티머니 모빌리티', en: 'T-money Mobility', group: 'corp', deals: [['MOU', 2025]], logo: 'assets/partners/tmoney-mobility.svg', url: 'https://www.tmoneymobility.com/' },
+    { id: 'labs', name: '랩스 주식회사', group: 'corp', deals: [['MOU', 2026]] },
+    { id: 'ipg-korea', name: '아이피지포토닉스코리아', en: 'IPG Photonics Korea', group: 'corp', deals: [['MOU', 2026]], logo: 'assets/partners/ipg-korea.svg', url: 'https://www.ipgphotonics.com/ko' }
+  ],
 
   /* 최근 성과 */
   news: [

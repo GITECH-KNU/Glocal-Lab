@@ -32,7 +32,7 @@
     })
     .sort((a, b) => b.year - a.year || PUB_ORDER[a.type] - PUB_ORDER[b.type] || a.i - b.i);
   const HERO = {
-    about: ['About', '컨소시엄 소개', '세 연구소의 강점을 융합하여 ‘주행거리 극대화 친환경 모빌리티’ 핵심기술 경쟁력을 확보합니다.'],
+    about: ['About', '컨소시엄 소개'],
     research: ['Research', '연구 분야', '소재부품 · 생산설계 · 지능제어 3개 분야의 융합 연구로 친환경 모빌리티의 주행거리 극대화 기술을 개발합니다.'],
     people: ['People', '구성원', '참여교수와 각 연구실의 박사후연구원·대학원생·학부연구생을 소개합니다.'],
     achievements: ['Achievements', '연구 성과', '최근 4년 SCI(E) 논문 180편, 특허 276건의 통합 연구역량.'],
@@ -41,7 +41,7 @@
   };
 
   let current = { route: null, tab: null };
-  const ui = { profFilter: 'all', labFilter: 'all', labQuery: '', equipFilter: 'all', pubFilter: 'all', galleryFilter: 'all', pub: { ...PUB_ALL }, pubLimit: PUB_PAGE };
+  const ui = { profFilter: 'all', labFilter: 'all', labQuery: '', equipFilter: 'all', pubFilter: 'all', galleryFilter: 'all', partnerFilter: 'all', pub: { ...PUB_ALL }, pubLimit: PUB_PAGE };
   let particleStop = null;
 
   /* ───────── helpers ───────── */
@@ -68,7 +68,7 @@
   const primaryLink = (p) => (p.links || []).find((l) => l.type === 'lab') || (p.links || [])[0];
 
   function sectionHead(kicker, title, lead) {
-    return `<div class="section-head reveal"><div><p class="section-kicker">${esc(kicker)}</p><h2 class="section-title small-title">${title}</h2></div>${lead ? `<p class="section-lead">${lead}</p>` : ''}</div>`;
+    return `<div class="section-head reveal"><div><p class="section-kicker">${esc(kicker)}</p>${title ? `<h2 class="section-title small-title">${title}</h2>` : ''}</div>${lead ? `<p class="section-lead">${lead}</p>` : ''}</div>`;
   }
   // 서브페이지 상단 오른쪽 사진 모자이크 – 섹션마다 다른 사진을 원본에 가까운 크기로 보여 줌
   const HERO_ART = {
@@ -87,7 +87,7 @@
   }
   function subHero(route) {
     const [kicker, title, lead] = HERO[route];
-    return `<section class="sub-hero sub-hero-${route}">${heroArt(route)}<div class="container"><p class="section-kicker">${esc(kicker)}</p><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></div></section>`;
+    return `<section class="sub-hero sub-hero-${route}">${heroArt(route)}<div class="container"><p class="section-kicker">${esc(kicker)}</p><h1>${esc(title)}</h1>${lead ? `<p class="lead">${esc(lead)}</p>` : ''}</div></section>`;
   }
   function tabBar(route, active) {
     if (!TABS[route]) return '';
@@ -180,7 +180,7 @@
           <p class="hero-label"><span class="pill">국립공주대학교</span> Global Institute of Manufacturing Technology</p>
           <h1 class="hero-title"><span>GITECH</span></h1>
           <p class="hero-subtitle">글로벌생산제조기술연구소</p>
-          <p class="hero-copy">모빌리티 분야 첨단 생산제조 기술 연구를 선도하는 국립공주대학교 연구소입니다. 국립한밭대학교 · KAIST와 함께 글로컬랩 ‘주행거리 극대화 친환경 모빌리티 컨소시엄’을 주관합니다.</p>
+          <p class="hero-copy">모빌리티 분야 첨단 생산제조 기술 연구를 선도하는 국립공주대학교 연구소입니다. <span class="nowrap-line">국립한밭대학교 · KAIST와 함께 글로컬랩 ‘주행거리 극대화 친환경 모빌리티 컨소시엄’을 주관합니다.</span></p>
           <div class="hero-actions">
             <a class="btn primary" href="#research">연구 분야 보기 ${ICON.arrow}</a>
             <a class="btn ghost" href="#achievements">연구 성과</a>
@@ -196,12 +196,10 @@
       </div></section>
 
       <section class="section"><div class="container">
-        ${sectionHead('Consortium', '세 연구소, 하나의 플랫폼', '충청권 제조 인프라(천안·아산)와 대전 R&D 역량을 잇는 생산설계 – 소재부품 – 지능제어 융합 컨소시엄입니다.')}
         <div class="inst-grid">${insts}</div>
       </div></section>
 
       <section class="section tint"><div class="container">
-        ${sectionHead('Research', '세 분야, 하나의 목표', '소재부품 · 생산설계 · 지능제어 — 세 연구소의 특화 분야가 하나로 모여 친환경 모빌리티의 주행거리를 극대화합니다.')}
         ${convergence()}
       </div></section>
 
@@ -223,7 +221,7 @@
       </div></section>
 
       <section class="section"><div class="container">
-        ${sectionHead('People', `참여교수 ${D.professors.length}인`, '소재부품 · 생산설계 · 지능제어 연구팀이 연구실 구성원과 함께 공동연구를 수행합니다.')}
+        ${sectionHead('People', `참여교수 ${D.professors.length}인`)}
         <div class="face-strip reveal">${faces}</div>
         <div class="btn-row reveal">
           <a class="btn secondary" href="#people/faculty">참여 교수 ${ICON.arrow}</a>
@@ -232,8 +230,9 @@
       </div></section>
 
       <section class="partner-band" aria-label="협력 기관">
-        <p class="partner-label">Partners</p>
-        <div class="partner-row">${[...D.partners.domestic, ...D.partners.global].map((n) => `<span>${esc(n.name)}</span>`).join('')}</div>
+        <p class="partner-label">Partners · 국내외 협력 기관 ${D.partners.length}곳</p>
+        <div class="partner-marquee"><div class="partner-track">${[0, 1].map((k) => `<div class="partner-set"${k ? ' aria-hidden="true"' : ''}>${D.partners.map((p) => `<span class="partner-plate">${partnerLogo(p)}</span>`).join('')}</div>`).join('')}</div></div>
+        <p class="partner-more"><a href="#about/network">협력 기관 전체 보기 ${ICON.arrow}</a></p>
       </section>`;
   }
 
@@ -341,8 +340,10 @@
   }
 
   function aboutConsortium() {
+    // 연구소 바로가기 – 하나를 고르면 해당 연구소로 이동하고 나머지는 흐리게
+    const nav = D.institutes.map((i) => `<button type="button" class="inst-link" style="--c: var(--${i.id})" data-inst-pick="${i.id}" aria-pressed="false"><img src="${esc(i.logo)}" alt="" /><span><b>${esc(i.name)}</b><small>${esc(i.univ)} · ${esc(i.spec)}</small></span></button>`).join('');
     const blocks = D.institutes.map((i) => `
-      <article class="inst-detail reveal" style="--c: var(--${i.id})">
+      <article class="inst-detail reveal" style="--c: var(--${i.id})" data-inst-block="${i.id}">
         <div class="inst-detail-side">
           <img class="building" src="${esc(i.building)}" alt="${esc(i.spaceWhere)}" loading="lazy" />
           <div class="side-head"><img src="${esc(i.logo)}" alt="" /><div><h3>${esc(i.name)}</h3><div class="en">${esc(i.univ)} · ${esc(i.nameEn)}</div></div></div>
@@ -366,8 +367,9 @@
           </div>
         </div>
       </article>`).join('');
-    return `<section class="section"><div class="container">
-      ${sectionHead('Consortium', '참여 연구소', '연구소별 전문성을 기반으로 상호 보완·융합하는 통합 연구역량을 확보했습니다. 공동 인프라 · 공동 연구 · 공동 성과 · 글로벌 네트워크.')}
+    return `<section class="section"><div class="container" data-inst-root>
+      ${sectionHead('Consortium', '참여 연구소')}
+      <div class="inst-nav reveal" role="group" aria-label="참여 연구소 바로가기">${nav}</div>
       ${blocks}
     </div></section>`;
   }
@@ -380,7 +382,7 @@
       return `<div class="om-cell" data-inst="${esc(INST_SHORT[i.id])}">${ps.length ? ps.map((p) => `<button type="button" class="om-prof" data-prof="${p.id}"><img src="${photo(p.id)}" alt="" loading="lazy" /><span>${esc(p.name)}</span></button>`).join('') : '<span class="om-empty">—</span>'}</div>`;
     };
     return `<section class="section"><div class="container">
-      ${sectionHead('Organization', '조직 구성', '연구책임자를 중심으로 3개 참여 연구소와 3개 기술연구그룹이 협력합니다. 교수 이름을 누르면 상세 정보를 볼 수 있습니다.')}
+      ${sectionHead('Organization', '조직 구성')}
       <div class="org reveal">
         <div class="org-node top"><b>총괄 · 연구책임자</b><span>이동경 교수 (국립공주대학교)</span></div>
         <div class="org-vline"></div>
@@ -393,17 +395,46 @@
     </div></section>`;
   }
 
-  const PARTNER_ICON = {
-    연구기관: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6l-5.4 9.4A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.4-2.6L14 9V3"/><path d="M7.2 15h9.6"/></svg>',
-    대학: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 9v6"/></svg>',
-    기업: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l6 4v-4l6 4V4h6v17H3Z"/><path d="M7 17h2M12 17h2M17 17h1"/></svg>'
-  };
+  /* 협력 기관 (data/site-data.js partners) – 지역별 묶음, 로고가 없으면 이니셜 배지 */
+  const PARTNER_GROUPS = [['na', 'North America', '북미'], ['eu', 'Europe', '유럽'], ['asia', 'Asia', '아시아'], ['kr', 'Korea · Academia & Research', '국내 대학·연구기관'], ['corp', 'Korea · Industry', '국내 기업']];
+  const isIntl = (p) => !['kr', 'corp'].includes(p.group);
+  const hasDeal = (p, t) => p.deals.some(([x]) => x === t);
+  function partnerMono(p) {
+    const words = (p.en || p.name).replace(/[().,·]/g, ' ').split(/[\s–-]+/).filter((w) => w && !/^(of|and|the|at|주식회사)$/i.test(w));
+    if (p.abbr) return p.abbr;
+    const caps = words.find((w) => /^[A-Z]{2,8}$/.test(w));
+    if (caps) return caps;
+    if (!/[A-Za-z]/.test(words.join(''))) return words[0].slice(0, 3);
+    return words.map((w) => w[0]).join('').toUpperCase().slice(0, 4);
+  }
+  // logo가 배열이면 여러 로고를 나란히 (예: LBNL · UC Berkeley 공동 LOI)
+  const partnerLogo = (p) => (p.logo ? [].concat(p.logo).map((src, i) => `<img src="${esc(src)}" alt="${i ? '' : esc(p.name)}" loading="lazy" />`).join('') : `<span class="partner-mono" role="img" aria-label="${esc(p.name)}">${esc(partnerMono(p))}</span>`);
+  function partnerCard(p) {
+    const sub = [p.ko || p.en, p.country].filter(Boolean).join(' · ');
+    const deals = p.deals.map(([t, y, note]) => `<li><span class="deal ${t.toLowerCase()}">${t}</span>${y ? `<span class="deal-year">${y}</span>` : ''}${note ? `<span class="deal-note">${esc(note)}</span>` : ''}</li>`).join('');
+    const [tag, attrs] = p.url ? ['a', ` href="${esc(p.url)}" target="_blank" rel="noopener" title="${esc(p.name)} 홈페이지"`] : ['div', ''];
+    return `<${tag} class="partner-card reveal"${attrs}>
+      <div class="partner-logo">${partnerLogo(p)}</div>
+      <div class="partner-info"><h4>${esc(p.name)}</h4>${sub ? `<p>${esc(sub)}</p>` : ''}<ul class="deal-list">${deals}</ul>${p.note ? `<p class="partner-note">${esc(p.note)}</p>` : ''}</div>
+      ${p.url ? `<span class="partner-ext">${ICON.ext}</span>` : ''}
+    </${tag}>`;
+  }
   function aboutNetwork() {
-    const card = (n) => `<div class="partner-card"><span class="partner-icon">${n.logo ? `<img src="${esc(n.logo)}" alt="" />` : PARTNER_ICON[n.type] || ''}</span><span><b>${esc(n.name)}</b><small>${esc([n.type, n.country].filter(Boolean).join(' · '))}</small></span></div>`;
-    const group = (title, list) => `<div class="reveal"><h3 class="block-title">${esc(title)} <span class="title-count">${list.length}</span></h3><div class="partner-grid">${list.map(card).join('')}</div></div>`;
+    const P = D.partners;
+    const f = ui.partnerFilter;
+    const intl = P.filter(isIntl);
+    const byCountry = [...new Set(intl.map((p) => p.country))].map((c) => [c, intl.filter((p) => p.country === c).length]).sort((a, b) => b[1] - a[1]);
+    const nDeals = (t) => sum(P.map((p) => p.deals.filter(([x]) => x === t).length));
+    const tiles = [['협력 기관', `${P.length}곳`], ['해외 기관', `${intl.length}곳 · ${byCountry.length}개 국가·지역`], ['국내 기관·기업', `${P.length - intl.length}곳`], ['MOU 체결', `${nDeals('MOU')}건`], ['LOI 체결', `${nDeals('LOI')}건`]];
+    const filters = [['all', '전체', P.length], ['MOU', 'MOU', P.filter((p) => hasDeal(p, 'MOU')).length], ['LOI', 'LOI', P.filter((p) => hasDeal(p, 'LOI')).length]];
+    const list = P.filter((p) => f === 'all' || hasDeal(p, f));
+    const groups = PARTNER_GROUPS.map(([id, en, ko]) => [en, ko, list.filter((p) => p.group === id)]).filter(([, , a]) => a.length);
     return `<section class="section"><div class="container">
-      ${sectionHead('Partners', '협력 기관')}
-      <div class="partner-groups">${group('Domestic Partners', D.partners.domestic)}${group('Global Partners', D.partners.global)}</div>
+      ${sectionHead('Partners', '협력 기관', `국내외 대학·연구기관·기업 ${P.length}곳과 MOU·LOI를 맺고 공동연구, 공동학위, 연구인력 교류를 추진합니다.`)}
+      <div class="kpi-sum kpi-5 reveal">${tiles.map(([l, v]) => `<div><b>${v}</b><span>${l}</span></div>`).join('')}</div>
+      <p class="partner-countries reveal">${byCountry.map(([c, n]) => `<span>${esc(c)} <b>${n}</b></span>`).join('')}</p>
+      <div class="filter-row" data-filter-group="partner">${filters.map(([id, l, n]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${f === id}">${l} <span class="count">${n}</span></button>`).join('')}</div>
+      <div class="partner-groups">${groups.map(([en, ko, a]) => `<section class="partner-group"><h3 class="partner-group-title reveal"><small>${esc(en)}</small>${esc(ko)} <span class="title-count">${a.length}</span></h3><div class="partner-grid">${a.map(partnerCard).join('')}</div></section>`).join('')}</div>
     </div></section>`;
   }
 
@@ -529,7 +560,7 @@
     const byRole = (r) => all.filter((m) => m.role === r).length;
     const tiles = [['전체 구성원', all.length], ['박사후연구원', byRole('postdoc')], ['박사·석박통합', byRole('phd') + byRole('integrated')], ['석사과정', byRole('ms')], ['학부연구생·인턴', byRole('ug') + byRole('intern')]];
     return `<section class="section"><div class="container">
-      ${sectionHead('Lab members', '연구실 구성원', `${D.professors.length}개 참여 연구실의 현재 구성원 ${all.length}명입니다. 각 연구실 홈페이지에 공개된 명단을 기준으로 정리했습니다(${esc((window.MEMBERS_DATA || {}).asOf || '')}).`)}
+      ${sectionHead('Lab members', '연구실 구성원')}
       <div class="kpi-sum kpi-5 reveal">${tiles.map(([l, v]) => `<div><b>${v}명</b><span>${l}</span></div>`).join('')}</div>
       <div class="filter-row" data-filter-group="lab">
         ${[['all', '전체'], ['knu', '국립공주대'], ['hanbat', '국립한밭대'], ['kaist', 'KAIST']].map(([id, l]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${ui.labFilter === id}">${l}</button>`).join('')}
@@ -560,7 +591,7 @@
       ${chartTable(['연구소', title], I.map((i) => [i.univ, `${i[key]}${unit}`]))}</div>`;
     return `<section class="section"><div class="container stack-lg">
       <div>
-        ${sectionHead('Track record', '연구소 운영 성과 (최근 4년)', '세 연구소의 강점을 융합하여 ‘주행거리 극대화 친환경 모빌리티’ 핵심기술 경쟁력을 확보합니다.')}
+        ${sectionHead('Track record', '연구소 운영 성과 (최근 4년)')}
         <div class="table-scroll reveal"><table class="compare-table">
           <thead><tr><th>구분</th>${I.map((i) => `<th class="${i.id}">[${esc(i.spec)}] ${esc(i.univ)}<br>${esc(i.name)}</th>`).join('')}<th class="total">컨소시엄</th></tr></thead>
           <tbody>
@@ -591,11 +622,11 @@
     const papers = D.recentPapers.map((p) => `<article class="pub-card reveal"><div class="year-badge"><small>${esc(p.date.split('.')[1] || '')}월</small>${esc(p.date.split('.')[0])}</div><div><h4>${esc(p.title || p.journal)}</h4><p>${p.title ? `<i>${esc(p.journal)}</i> · ` : ''}${esc(profName(p.who))} 교수 연구팀</p></div><div class="metric"><b>IF ${p.if}</b><span class="${/Top/.test(p.jcr) && parseFloat(p.jcr.replace(/[^0-9.]/g, '')) <= 10 ? 'top' : ''}">${esc(p.jcr)}</span></div></article>`).join('');
     return `<section class="section"><div class="container stack-lg">
       <div>
-        ${sectionHead('2026 updates', '최근 성과', '2026년 신규 국책과제 수주, 해외 공동학위 MOU, 국제 학술지 편집위원 활동 등 컨소시엄의 최신 성과입니다.')}
+        ${sectionHead('2026 updates', '최근 성과')}
         <div class="news-grid">${news}</div>
       </div>
       <div>
-        ${sectionHead('New publications', '2026년 SCI(E) 게재 논문', '사업 착수 전후 확보한 SCI(E) 논문 6편 중 5편이 JCR 상위 10% 이내입니다.')}
+        ${sectionHead('New publications', '2026년 SCI(E) 게재 논문')}
         <div class="pub-list">${papers}</div>
       </div>
     </div></section>`;
@@ -613,10 +644,9 @@
         : '';
       return `<article class="pub-card reveal"><div class="year-badge"><small>YEAR</small>${r.year}</div><div><h4>${esc(r.journal)}</h4><p>${esc(r.p.name)} 교수 · ${esc(INST_SHORT[r.p.inst])} · ${esc(FORM[r.p.team].name)}</p></div>${metric}</article>`;
     }).join('');
-    const top10 = rows.filter((r) => jcrRank(r.jcr) <= 10).length;
     return `<section class="section"><div class="container stack-lg">
       <div>
-        ${sectionHead('Representative papers', '참여교수 SCI(E) 대표 연구실적', `참여교수의 최근 대표 논문입니다. 표시된 ${rows.length}편 중 ${top10}편이 JCR 상위 10% 이내 학술지입니다.`)}
+        ${sectionHead('Representative papers', '참여교수 SCI(E) 대표 연구실적')}
         <div class="filter-row" data-filter-group="pub">${filters.map(([id, l]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${ui.pubFilter === id}">${l}</button>`).join('')}</div>
         <div class="pub-list">${list}</div>
       </div>
@@ -708,10 +738,9 @@
   function achPublications() {
     ui.pubLimit = PUB_PAGE;
     const list = pubSelect();
-    const years = PUBS.length ? `${PUBS[PUBS.length - 1].year}–${PUBS[0].year}` : '';
     const tiles = [['전체', PUBS.length], ...PUB_TYPES.map(([id, l]) => [l, PUBS.filter((x) => x.type === id).length])];
     return `<section class="section"><div class="container" data-pub-root>
-      ${sectionHead('Publications', '논문 · 학술대회 실적', `참여교수 ${D.professors.length}인의 최근 4년(${years}) 국제·국내 학술지 논문과 학술대회 발표 실적입니다. 유형·분야·연도·교수별로 골라 볼 수 있습니다.`)}
+      ${sectionHead('Publications', '논문 · 학술대회 실적', '최근 4년')}
       <div class="kpi-sum kpi-5 reveal">${tiles.map(([l, v]) => `<div><b>${fmt(v)}건</b><span>${l}</span></div>`).join('')}</div>
       <div class="pub-filters reveal">
         <div class="pub-facets" data-pub-facets>${pubFacets()}</div>
@@ -952,12 +981,23 @@
       pubRefresh();
       return;
     }
+    const ip = t.closest('[data-inst-pick]');
+    if (ip) {
+      const root = ip.closest('[data-inst-root]');
+      // 이미 선택된 연구소를 다시 누르면 선택 해제
+      const id = ip.getAttribute('aria-pressed') === 'true' ? null : ip.dataset.instPick;
+      root.classList.toggle('has-pick', !!id);
+      root.querySelectorAll('[data-inst-pick]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.instPick === id)));
+      root.querySelectorAll('[data-inst-block]').forEach((a) => a.classList.toggle('is-picked', a.dataset.instBlock === id));
+      if (id) root.querySelector(`[data-inst-block="${id}"]`).scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+      return;
+    }
     const pl = t.closest('[data-pub-prof-link]');
     if (pl) { closeModal(); showProfPubs(pl.dataset.pubProfLink); return; }
     const fb = t.closest('[data-filter]');
     if (fb) {
       const group = fb.closest('[data-filter-group]').dataset.filterGroup;
-      const key = { prof: 'profFilter', lab: 'labFilter', equip: 'equipFilter', pub: 'pubFilter', gallery: 'galleryFilter' }[group];
+      const key = { prof: 'profFilter', lab: 'labFilter', equip: 'equipFilter', pub: 'pubFilter', gallery: 'galleryFilter', partner: 'partnerFilter' }[group];
       ui[key] = fb.dataset.filter;
       if (current.route === 'gallery') { const panel = app.querySelector('[data-panel]'); panel.innerHTML = renderGallery(); panel.querySelectorAll('.reveal').forEach((x) => x.classList.add('in')); afterRender(panel); }
       else rerenderPanel();

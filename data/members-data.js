@@ -2,6 +2,7 @@
  * 참여교수 홈페이지 링크 및 연구실 구성원
  * 출처: 각 연구실 홈페이지·학과 교수소개 페이지 (2026.10 웹 조사)
  * 구성원이 바뀌면 members 배열만 수정하면 됩니다.
+ * keywordsEn: 영어 모드에서 보여 줄 연구 키워드 (없으면 keywords를 그대로 표시)
  * role: postdoc(박사후연구원) · phd(박사과정) · integrated(석박통합) · ms(석사과정) · ug(학부연구생) · intern(인턴) · staff(연구원·직원)
  */
 window.MEMBERS_DATA = {
@@ -37,6 +38,13 @@ window.MEMBERS_DATA = {
         "연료전지 GDL·분리판 레이저 미세가공",
         "반도체 TGV/TSV/TCV 레이저 드릴링",
         "원전해체 레이저 절단·제염"
+      ],
+      "keywordsEn": [
+        "Laser-aided manufacturing",
+        "Laser processing of battery electrodes · dissimilar-metal welding",
+        "Laser micromachining of fuel-cell GDLs · bipolar plates",
+        "Laser drilling of semiconductor TGV/TSV/TCV",
+        "Laser cutting · decontamination for nuclear decommissioning"
       ],
       "members": [
         {
@@ -133,6 +141,14 @@ window.MEMBERS_DATA = {
         "리튬 분리·농축(배터리 재활용)",
         "염분차 발전"
       ],
+      "keywordsEn": [
+        "Nano/microfluidics",
+        "Ion-exchange membranes (IEM)",
+        "Electrodialysis · desalination",
+        "Ion concentration polarization · electroconvection",
+        "Lithium separation · enrichment (battery recycling)",
+        "Salinity-gradient power"
+      ],
       "members": [
         {
           "name": "한석희",
@@ -202,6 +218,13 @@ window.MEMBERS_DATA = {
         "전기화학 기반 에너지시스템",
         "CO2 전기환원"
       ],
+      "keywordsEn": [
+        "Hydrogen energy",
+        "PEMFC electrocatalysts",
+        "Water electrolysis",
+        "Electrochemical energy systems",
+        "CO2 electroreduction"
+      ],
       "members": []
     },
     "shin-joonghan": {
@@ -230,6 +253,14 @@ window.MEMBERS_DATA = {
         "레이저 어닐링",
         "딥러닝 기반 레이저 공정 모니터링",
         "레이저 공정 시뮬레이션"
+      ],
+      "keywordsEn": [
+        "Laser welding",
+        "Laser micromachining (wafer stealth dicing, glass/ceramic hole drilling)",
+        "Laser cutting · patterning of battery electrodes",
+        "Laser annealing",
+        "Deep-learning-based laser process monitoring",
+        "Laser process simulation"
       ],
       "members": [
         {
@@ -326,6 +357,14 @@ window.MEMBERS_DATA = {
         "신재생 에너지 생산·저장",
         "배터리 열관리(BTMS)"
       ],
+      "keywordsEn": [
+        "IR thermography-based semiconductor defect inspection · metrology",
+        "Radiative cooling",
+        "Heat transfer · thermophysical property measurement",
+        "Multiphysics-based smart manufacturing design",
+        "Renewable energy generation · storage",
+        "Battery thermal management (BTMS)"
+      ],
       "members": [
         {
           "name": "임재현",
@@ -406,6 +445,14 @@ window.MEMBERS_DATA = {
         "가제어성(controllability) 기반 제어 설계",
         "소음·진동 능동제어"
       ],
+      "keywordsEn": [
+        "Optimal control",
+        "Integrated navigation (GNSS/INS)",
+        "SAR signal processing",
+        "Dynamics",
+        "Controllability-based control design",
+        "Active noise · vibration control"
+      ],
       "members": []
     },
     "yoon-hongseok": {
@@ -434,6 +481,14 @@ window.MEMBERS_DATA = {
       ],
       "keywords": [
         "유연전자소자(OLED/OPV) 제조공정·시스템",
+        "Micro/Nano-scale Fabrication System",
+        "Precision Measurement System",
+        "Transparent/Flexible Displays (OLED/QD)",
+        "Nanoscale/Quantum Devices",
+        "Plasmonic Energy Transfer"
+      ],
+      "keywordsEn": [
+        "Flexible electronics (OLED/OPV) fabrication processes · systems",
         "Micro/Nano-scale Fabrication System",
         "Precision Measurement System",
         "Transparent/Flexible Displays (OLED/QD)",
@@ -499,6 +554,14 @@ window.MEMBERS_DATA = {
         "위성 열·구조 해석",
         "Deep learning 반도체 이미지 처리",
         "에너지 저장 소재 합성"
+      ],
+      "keywordsEn": [
+        "Semiconductor metrology & inspection",
+        "Thermography non-destructive testing",
+        "CNT/CNF ultra-black coating (space)",
+        "Satellite thermal · structural analysis",
+        "Deep-learning semiconductor image processing",
+        "Energy storage material synthesis"
       ],
       "members": [
         {
@@ -1329,6 +1392,14 @@ window.MEMBERS_DATA = {
         "열물성 예측·역설계",
         "학습 기반 모델링·최적화"
       ],
+      "keywordsEn": [
+        "Radiative heat transfer control",
+        "Optical metamaterials",
+        "Radiative cooling",
+        "Optimal design of thermal management systems",
+        "Thermophysical property prediction · inverse design",
+        "Learning-based modeling · optimization"
+      ],
       "members": [
         {
           "name": "고인환",
@@ -1409,6 +1480,14 @@ window.MEMBERS_DATA = {
         "액체금속 반도체 냉각",
         "PCM 배터리 냉각"
       ],
+      "keywordsEn": [
+        "Thermal management",
+        "Phase-change heat transfer",
+        "Micro/nano surface engineering",
+        "Special-wettability surfaces",
+        "Liquid-metal semiconductor cooling",
+        "PCM battery cooling"
+      ],
       "members": [
         {
           "name": "이성중",
@@ -1479,6 +1558,14 @@ window.MEMBERS_DATA = {
         "자율운항 선박",
         "모바일 로봇"
       ],
+      "keywordsEn": [
+        "Safe control (control barrier functions)",
+        "Model predictive control (MPC)",
+        "Reachability analysis",
+        "Learning-based path planning · control",
+        "Autonomous ships",
+        "Mobile robots"
+      ],
       "members": [
         {
           "name": "곽정미",
@@ -1533,6 +1620,14 @@ window.MEMBERS_DATA = {
         "수소에너지 박막 전극 내구성",
         "유연 플라스틱 액츄에이터",
         "유한요소해석(FEM)"
+      ],
+      "keywordsEn": [
+        "Mechanical reliability of thin-film materials",
+        "Micro/nano tensile testing",
+        "Semiconductor package reliability (warpage)",
+        "Durability of thin-film electrodes for hydrogen energy",
+        "Flexible plastic actuators",
+        "Finite element analysis (FEM)"
       ],
       "members": [
         {
@@ -1649,6 +1744,14 @@ window.MEMBERS_DATA = {
         "광학 제조",
         "공작기계 설계"
       ],
+      "keywordsEn": [
+        "Ultra-precision machining",
+        "Micromachining",
+        "Optomechanics",
+        "Optical component design",
+        "Optical manufacturing",
+        "Machine tool design"
+      ],
       "members": []
     },
     "jeong-gileon": {
@@ -1682,6 +1785,14 @@ window.MEMBERS_DATA = {
         "인공지능(머신러닝)",
         "대리모델",
         "사용후핵연료 처분용기"
+      ],
+      "keywordsEn": [
+        "Structural analysis",
+        "Optimal design",
+        "Topology optimization",
+        "Artificial intelligence (machine learning)",
+        "Surrogate models",
+        "Spent nuclear fuel disposal canisters"
       ],
       "members": [
         {
@@ -1744,6 +1855,14 @@ window.MEMBERS_DATA = {
         "다물체 동역학",
         "오그제틱 다공성 소재"
       ],
+      "keywordsEn": [
+        "Energy harvesting",
+        "Triboelectric nanogenerators",
+        "Droplet energy harvesting",
+        "Frequency tuning systems",
+        "Multibody dynamics",
+        "Auxetic porous materials"
+      ],
       "members": []
     },
     "park-seongyeon": {
@@ -1777,6 +1896,14 @@ window.MEMBERS_DATA = {
         "압력용기 CAE 해석",
         "신뢰성 해석",
         "구조 설계"
+      ],
+      "keywordsEn": [
+        "Advanced composites",
+        "Semiconductor packaging",
+        "Cryogenic tank component design",
+        "CAE analysis of pressure vessels",
+        "Reliability analysis",
+        "Structural design"
       ],
       "members": []
     }

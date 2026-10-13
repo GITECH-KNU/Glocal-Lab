@@ -162,6 +162,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .mobile-menu-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 .theme-toggle { flex: 0 0 auto; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff; transition: background var(--fast), border-color var(--fast); }
 .theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lang-toggle { flex: 0 0 auto; width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border-radius: 50%; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff; font-size: 12px; font-weight: 850; letter-spacing: .04em; transition: background var(--fast), border-color var(--fast); }
 .theme-toggle .i-sun, [data-theme="dark"] .theme-toggle .i-moon { display: none; }
 [data-theme="dark"] .theme-toggle .i-sun { display: block; }
 
@@ -786,7 +787,7 @@ button.ext-link { border: 0; cursor: pointer; }
 @media (hover: hover) and (pointer: fine) {
   .main-nav a:hover { opacity: 1; transform: translateY(-1px); }
   .main-nav a:hover::after { transform: scaleX(1); }
-  .theme-toggle:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.42); }
+  .theme-toggle:hover, .lang-toggle:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.42); }
   .btn:hover { transform: translateY(-2px); }
   .btn:hover .arrow { transform: translateX(3px); }
   .btn.primary:hover { box-shadow: 0 22px 48px rgba(49, 127, 196, 0.36); }

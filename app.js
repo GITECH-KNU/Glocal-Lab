@@ -25,6 +25,7 @@
   const PUB_ORDER = Object.fromEntries(PUB_TYPES.map(([id], i) => [id, i]));
   const PUB_ALL = { type: 'all', field: 'all', year: 'all', prof: 'all', q: '' };
   const PUB_PAGE = 30; // 논문·학회 목록을 처음에 보여 줄 건수 (‘더 보기’마다 2배씩 추가)
+  const REP_PAGE = 8; // 대표 연구실적을 처음에 보여 줄 편수 (‘더 보기’마다 같은 수만큼 추가)
   const PUBS = PUB_DATA.items
     .map((x, i) => {
       const profs = (x.profs || []).filter((id) => PROF[id]);
@@ -35,13 +36,13 @@
     about: ['About', '컨소시엄 소개'],
     research: ['Research', '연구 분야', '소재부품 · 생산설계 · 지능제어 3개 분야의 융합 연구로 친환경 모빌리티의 주행거리 극대화 기술을 개발합니다.'],
     people: ['People', '구성원', '참여교수와 각 연구실의 박사후연구원·대학원생·학부연구생을 소개합니다.'],
-    achievements: ['Achievements', '연구 성과', '최근 4년 SCI(E) 논문 180편, 특허 276건의 통합 연구역량.'],
+    achievements: ['Achievements', '연구 성과'],
     gallery: ['Gallery', '활동 갤러리', 'MOU, 워크샵, 세미나, 협약식 등 컨소시엄 참여 연구소의 주요 활동입니다.'],
     contact: ['Contact', '연락처', '공동연구, 산학협력, 대학원 진학 및 박사후연구원 지원에 관한 문의를 환영합니다.']
   };
 
   let current = { route: null, tab: null };
-  const ui = { profFilter: 'all', labFilter: 'all', labQuery: '', equipFilter: 'all', pubFilter: 'all', galleryFilter: 'all', partnerFilter: 'all', pub: { ...PUB_ALL }, pubLimit: PUB_PAGE };
+  const ui = { profFilter: 'all', labFilter: 'all', labQuery: '', equipFilter: 'all', pubFilter: 'all', galleryFilter: 'all', partnerFilter: 'all', pub: { ...PUB_ALL }, pubLimit: PUB_PAGE, repLimit: REP_PAGE };
   let particleStop = null;
 
   /* ───────── helpers ───────── */
@@ -430,7 +431,7 @@
     const list = P.filter((p) => f === 'all' || hasDeal(p, f));
     const groups = PARTNER_GROUPS.map(([id, en, ko]) => [en, ko, list.filter((p) => p.group === id)]).filter(([, , a]) => a.length);
     return `<section class="section"><div class="container">
-      ${sectionHead('Partners', '협력 기관', `국내외 대학·연구기관·기업 ${P.length}곳과 MOU·LOI를 맺고 공동연구, 공동학위, 연구인력 교류를 추진합니다.`)}
+      ${sectionHead('Partners', '협력 기관')}
       <div class="kpi-sum kpi-5 reveal">${tiles.map(([l, v]) => `<div><b>${v}</b><span>${l}</span></div>`).join('')}</div>
       <p class="partner-countries reveal">${byCountry.map(([c, n]) => `<span>${esc(c)} <b>${n}</b></span>`).join('')}</p>
       <div class="filter-row" data-filter-group="partner">${filters.map(([id, l, n]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${f === id}">${l} <span class="count">${n}</span></button>`).join('')}</div>
@@ -637,7 +638,8 @@
     const rows = D.professors.filter((p) => ui.pubFilter === 'all' || p.team === ui.pubFilter).flatMap((p) => (p.pubs || []).map((x) => ({ ...x, p })));
     rows.sort((a, b) => b.year - a.year || (b.if || 0) - (a.if || 0));
     const jcrRank = (jcr) => { const n = parseFloat(String(jcr || '').replace(/[^0-9.]/g, '')); return Number.isFinite(n) ? n : NaN; };
-    const list = rows.map((r) => {
+    const shown = rows.slice(0, ui.repLimit);
+    const list = shown.map((r) => {
       const top = jcrRank(r.jcr);
       const metric = (r.if != null || r.jcr)
         ? `<div class="metric">${r.if != null ? `<b>IF ${Number(r.if).toFixed(1)}</b>` : ''}${r.jcr ? `<span class="${top <= 10 ? 'top' : ''}">JCR ${esc(r.jcr)}</span>` : ''}</div>`
@@ -649,9 +651,10 @@
         ${sectionHead('Representative papers', '참여교수 SCI(E) 대표 연구실적')}
         <div class="filter-row" data-filter-group="pub">${filters.map(([id, l]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${ui.pubFilter === id}">${l}</button>`).join('')}</div>
         <div class="pub-list">${list}</div>
+        ${rows.length > shown.length ? `<div class="pub-more"><button type="button" class="btn secondary" data-rep-more>더 보기 <span>${shown.length} / ${rows.length}편</span></button></div>` : ''}
       </div>
       <div>
-        ${sectionHead('Highlights', '생산·설계 분야 주요 게재 학술지', '국립공주대 글로벌생산제조기술연구소 참여교원의 고피인용 학술지 게재 실적입니다.')}
+        ${sectionHead('Highlights', '생산·설계 분야 주요 게재 학술지')}
         <div class="cover-grid">${D.coverPapers.map((c) => `<figure class="cover reveal"><img src="${esc(c.img)}" alt="${esc(c.journal)} 표지" loading="lazy" /><div><b>${esc(c.journal)}</b><span>IF ${c.if}</span></div></figure>`).join('')}</div>
       </div>
     </div></section>`;
@@ -973,6 +976,14 @@
       if (first) { first.tabIndex = -1; first.focus({ preventScroll: true }); }
       return;
     }
+    if (t.closest('[data-rep-more]')) {
+      const shown = ui.repLimit;
+      ui.repLimit += REP_PAGE;
+      rerenderPanel();
+      const first = app.querySelectorAll('.pub-list .pub-card')[shown];
+      if (first) { first.tabIndex = -1; first.focus({ preventScroll: true }); }
+      return;
+    }
     if (t.closest('[data-pub-top]')) { app.querySelector('.pub-filters').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' }); return; }
     if (t.closest('[data-pub-reset]')) {
       ui.pub = { ...PUB_ALL };
@@ -999,6 +1010,7 @@
       const group = fb.closest('[data-filter-group]').dataset.filterGroup;
       const key = { prof: 'profFilter', lab: 'labFilter', equip: 'equipFilter', pub: 'pubFilter', gallery: 'galleryFilter', partner: 'partnerFilter' }[group];
       ui[key] = fb.dataset.filter;
+      if (group === 'pub') ui.repLimit = REP_PAGE;
       if (current.route === 'gallery') { const panel = app.querySelector('[data-panel]'); panel.innerHTML = renderGallery(); panel.querySelectorAll('.reveal').forEach((x) => x.classList.add('in')); afterRender(panel); }
       else rerenderPanel();
       return;

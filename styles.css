@@ -681,6 +681,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .pub-profs { display: contents; }
 .pub-profs button { display: inline-flex; align-items: center; gap: 6px; min-height: 26px; padding: 1px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text-2); font-size: 12px; font-weight: 800; cursor: pointer; transition: background var(--fast), border-color var(--fast); }
 .pub-source { margin: 28px 0 0; color: var(--muted-2); font-size: 13px; }
+/* 사사 문구 – 누르면 펼쳐지는 국문·영문 표기 */
+.ack-details { margin-top: 16px; }
+.ack-details > summary { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; font-weight: 700; cursor: pointer; list-style: none; transition: color var(--fast); }
+.ack-details > summary::-webkit-details-marker { display: none; }
+.ack-details > summary::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid; border-bottom: 1.5px solid; transform: rotate(-45deg); transition: transform var(--fast); }
+.ack-details[open] > summary::before { transform: rotate(45deg); }
+.ack-list { margin: 10px 0 0; padding-left: 1.1em; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.ack-list li { margin: 6px 0; }
+.ack-label { display: inline-block; margin-right: 8px; color: var(--muted-2); font-weight: 700; }
 button.ext-link { border: 0; cursor: pointer; }
 .cover-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 200px)); gap: 16px; }
 .cover { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-soft); text-align: center; }
@@ -804,6 +813,7 @@ button.ext-link { border: 0; cursor: pointer; }
   a.partner-card:hover { translate: 0 -4px; box-shadow: var(--shadow); border-color: rgba(63,134,201,.35); }
   .filter-btn:not([aria-pressed="true"]):not(:disabled):hover { background: var(--soft-blue); }
   .inst-link:hover { border-color: var(--c); }
+  .ack-details > summary:hover { color: var(--blue); }
   .has-pick .inst-link:hover { opacity: 1; }
   .pub-profs button:hover { background: var(--soft-blue); border-color: rgba(63,134,201,.4); }
   .ext-link:hover { transform: translateY(-1px); }

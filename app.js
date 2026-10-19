@@ -811,6 +811,10 @@
       <p class="pub-summary" data-pub-summary aria-live="polite">${pubSummary(list)}</p>
       <div data-pub-list>${pubList(list)}</div>
       <p class="pub-source">${tr(`출처: 각 연구실 홈페이지 · OpenAlex · Google Scholar (${esc(PUB_DATA.asOf || '')} 조사). 2023년 이후 게재·발표분이며, 참여교수가 공저한 논문은 한 번만 표시합니다.`, `Sources: lab websites · OpenAlex · Google Scholar (surveyed ${esc(PUB_DATA.asOf || '')}). Covers work published or presented since 2023; papers co-authored by several participating faculty are listed once. Domestic papers are shown with their original Korean titles.`)}</p>
+      ${(D.acknowledgments || []).length ? `<details class="ack-details">
+        <summary>${tr('사사 문구', 'Acknowledgment')}</summary>
+        <ul class="ack-list">${D.acknowledgments.map((a) => `<li><span class="ack-label">${tr('국문표기', 'Korean')}</span>${esc(a.ko)}<br><span class="ack-label">${tr('영문표기', 'English')}</span><span lang="en">${esc(a.en)}</span></li>`).join('')}</ul>
+      </details>` : ''}
     </div></section>`;
   }
   function pubRefresh() {

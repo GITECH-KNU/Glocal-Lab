@@ -45,6 +45,14 @@ window.SITE_DATA = {
     mapQuery: '국립공주대학교 천안캠퍼스'
   },
 
+  /* 사사 문구 – 논문·학회 페이지 맨 아래 ‘사사 문구’를 누르면 국문·영문 표기가 함께 나옵니다 */
+  acknowledgments: [
+    {
+      ko: '본 연구성과는 2026년도 정부(교육부)의 재원으로 한국연구재단의 지원을 받아 수행된 기초연구사업임(No. RS-2026-25576586)',
+      en: 'This research was supported by Basic Science Research Program through the National Research Foundation of Korea (NRF) funded by the Ministry of Education (No. RS-2026-25576586)'
+    }
+  ],
+
   /* 컨소시엄 총괄 지표 */
   stats: [
     { value: 65, unit: '명', unitEn: '', label: '참여 교원', labelEn: 'Faculty members' },

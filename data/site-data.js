@@ -396,8 +396,11 @@ window.SITE_DATA = {
     { inst: 'kaist', title: '배터리 실험실', titleEn: 'Battery Lab', img: 'assets/campus/k_bat.jpg' }
   ],
 
-  /* 갤러리 */
+  /* 갤러리 – 사업 시작(meta.phases 첫 단계 시작월, 2026.09) 이전이거나 date가 비어 있는 활동은
+   * 갤러리 아래 ‘지난 활동’에 접혀 있다가 누르면 펼쳐집니다. 새 행사는 date를 꼭 적어 주세요.
+   * 여러 기관이 함께한 행사는 inst: ['knu', 'hanbat', 'kaist']처럼 적습니다 (세 기관 모두면 ‘합동’ 표시). */
   gallery: [
+    { inst: ['knu', 'hanbat', 'kaist'], date: '2026.11', title: '글로컬랩 킥오프 워크숍', titleEn: 'Glocal Lab Kickoff Workshop', img: 'assets/gallery/kickoff_2026_1.jpg', images: ['assets/gallery/kickoff_2026_1.jpg', 'assets/gallery/kickoff_2026_2.jpg'], body: '국립공주대학교 · 국립한밭대학교 · KAIST 3개 기관 합동 킥오프 워크숍 (2026.11.16–17)', bodyEn: 'Joint kickoff workshop of Kongju National University, Hanbat National University and KAIST (Nov 16–17, 2026)' },
     { inst: 'knu', date: '2023.10', title: '산학 워크샵', titleEn: 'Industry–Academia Workshop', img: 'assets/gallery/iuworkshop.jpg', images: ['assets/gallery/iuworkshop.jpg', 'assets/gallery/iuws2.jpg'], body: '지역 기업과 함께한 산학 워크샵', bodyEn: 'Industry–academia workshop with regional companies' },
     { inst: 'knu', date: '2023.08', title: '공주대–난양공대 공동연구', titleEn: 'KNU–NTU Joint Research', img: 'assets/gallery/nanyang.jpg', body: 'Nanyang Technological University와의 국제 공동연구', bodyEn: 'International joint research with Nanyang Technological University' },
     { inst: 'knu', date: '2023.08', title: '산업체 전문가 초청 세미나', titleEn: 'Industry Expert Seminar', img: 'assets/gallery/expert.jpg', body: '산업체 전문가를 초청한 기술 세미나', bodyEn: 'Technical seminar with invited industry experts' },

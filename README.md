@@ -24,6 +24,8 @@
 - **연구실 구성원 변경**: `data/members-data.js` → 해당 교수의 `members` 배열을 수정합니다.
   `role` 값은 `postdoc`, `phd`, `integrated`, `ms`, `ug`, `intern`, `staff` 중 하나입니다.
 - **갤러리 사진 추가**: `assets/gallery/`에 사진을 넣고 `data/site-data.js` → `gallery`에 항목을 추가합니다.
+  `date`가 사업 시작월(2026.09) 이전이거나 비어 있으면 갤러리 아래 ‘지난 활동’에 접혀 들어가므로, 새 행사는 `date`를 꼭 적습니다.
+  여러 기관이 함께한 행사는 `inst: ['knu', 'hanbat', 'kaist']`처럼 적습니다 (세 기관 모두면 ‘합동’으로 표시되고 어느 기관 필터에서도 보입니다).
 - **협력 기관 추가**: `data/site-data.js` → `partners`에 한 줄을 추가합니다. `group`은 `na`(북미), `eu`(유럽), `asia`(아시아),
   `kr`(국내 대학·연구기관), `corp`(국내 기업) 중 하나이고, `deals`에 `['MOU', 2026, '비고']`처럼 협약을 적습니다.
   로고는 `assets/partners/`에 넣고 `logo`에 경로를 적습니다(없으면 이니셜 배지로 표시, 흰 바탕에서 잘 보이는 SVG·PNG 권장).

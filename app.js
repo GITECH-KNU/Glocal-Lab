@@ -68,7 +68,7 @@
   const heroText = (route) => tr(...HERO[route]);
 
   let current = { route: null, tab: null };
-  const ui = { profFilter: 'all', labFilter: 'all', labQuery: '', equipFilter: 'all', pubFilter: 'all', galleryFilter: 'all', partnerFilter: 'all', pub: { ...PUB_ALL }, pubLimit: PUB_PAGE, repLimit: REP_PAGE };
+  const ui = { profFilter: 'all', labFilter: 'all', labQuery: '', equipFilter: 'all', pubFilter: 'all', galleryFilter: 'all', partnerFilter: 'all', pub: { ...PUB_ALL }, pubLimit: PUB_PAGE, repLimit: REP_PAGE, galleryPastOpen: false };
 
   /* ───────── helpers ───────── */
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -785,12 +785,30 @@
   }
 
   /* ───────── GALLERY ───────── */
+  // 사업 시작(첫 단계 시작월) 이전이거나 날짜가 없는 활동은 ‘지난 활동’으로 접어 둠
+  const galleryPast = (g) => !g.date || g.date < D.meta.phases[0].start;
+  // inst는 한 기관('knu') 또는 여러 기관(['knu', 'hanbat', 'kaist'] – 합동 행사)
+  const galleryInsts = (g) => [].concat(g.inst);
+  const galleryHas = (g, id) => id === 'all' || galleryInsts(g).includes(id);
+  const galleryChip = (g) => {
+    const ids = galleryInsts(g);
+    if (ids.length === 1) return instChip(ids[0]);
+    const label = ids.length === D.institutes.length ? tr('합동', 'Joint') : ids.map(instShort).join(' · ');
+    return `<span class="chip joint"><span class="dot joint"></span>${esc(label)}</span>`;
+  };
+  const galleryCard = (g) => `<button type="button" class="gallery-card" data-gallery="${g.i}"><img src="${esc(g.img)}" alt="${esc(L(g, 'title'))}" loading="lazy" /><div class="g-body"><div class="g-meta">${galleryChip(g)}${g.date ? `<span>${esc(g.date)}</span>` : ''}</div><h3>${esc(L(g, 'title'))}</h3><p>${esc(L(g, 'body'))}</p></div></button>`;
   function renderGallery() {
-    const items = D.gallery.map((g, i) => ({ ...g, i })).filter((g) => ui.galleryFilter === 'all' || g.inst === ui.galleryFilter);
-    const cnt = (f) => D.gallery.filter((g) => f === 'all' || g.inst === f).length;
+    const items = D.gallery.map((g, i) => ({ ...g, i })).filter((g) => galleryHas(g, ui.galleryFilter));
+    const recent = items.filter((g) => !galleryPast(g));
+    const past = items.filter(galleryPast);
+    const cnt = (f) => D.gallery.filter((g) => galleryHas(g, f)).length;
     return `<section class="section"><div class="container">
       <div class="filter-row" data-filter-group="gallery">${[['all', tr('전체', 'All')], ['knu', tr('국립공주대', 'KNU')], ['hanbat', tr('국립한밭대', 'HBNU')], ['kaist', 'KAIST']].map(([id, l]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${ui.galleryFilter === id}">${l} <span class="count">${cnt(id)}</span></button>`).join('')}</div>
-      <div class="gallery-grid">${items.map((g) => `<button type="button" class="gallery-card" data-gallery="${g.i}"><img src="${esc(g.img)}" alt="${esc(L(g, 'title'))}" loading="lazy" /><div class="g-body"><div class="g-meta">${instChip(g.inst)}${g.date ? `<span>${esc(g.date)}</span>` : ''}</div><h3>${esc(L(g, 'title'))}</h3><p>${esc(L(g, 'body'))}</p></div></button>`).join('')}</div>
+      ${recent.length ? `<div class="gallery-grid">${recent.map(galleryCard).join('')}</div>` : ''}
+      ${past.length ? `<details class="gallery-past" data-gallery-past${ui.galleryPastOpen ? ' open' : ''}>
+        <summary>${tr(`지난 활동 ${past.length}건`, `Earlier activities (${past.length})`)}</summary>
+        <div class="gallery-grid">${past.map(galleryCard).join('')}</div>
+      </details>` : ''}
     </div></section>`;
   }
 
@@ -871,7 +889,7 @@
     const el = lightbox.querySelector('[data-lightbox-image]');
     el.src = imgs[lb.img];
     el.alt = L(g, 'title');
-    lightbox.querySelector('[data-lightbox-count]').textContent = `${L(INST[g.inst], 'univ')}${g.date ? ' · ' + g.date : ''}${imgs.length > 1 ? ` · ${lb.img + 1}/${imgs.length}` : ''}`;
+    lightbox.querySelector('[data-lightbox-count]').textContent = `${galleryInsts(g).map((id) => L(INST[id], 'univ')).join(' · ')}${g.date ? ' · ' + g.date : ''}${imgs.length > 1 ? ` · ${lb.img + 1}/${imgs.length}` : ''}`;
     lightbox.querySelector('[data-lightbox-title]').textContent = L(g, 'title');
     lightbox.querySelector('[data-lightbox-body]').textContent = L(g, 'body');
   }
@@ -1003,6 +1021,8 @@
     }
   });
   let searchTimer = null;
+  // 갤러리 ‘지난 활동’을 펼친 상태는 기관 필터를 바꿔도 유지 (toggle 이벤트는 버블링되지 않아 캡처 단계에서 받음)
+  document.addEventListener('toggle', (e) => { if (e.target.matches('[data-gallery-past]')) ui.galleryPastOpen = e.target.open; }, true);
   document.addEventListener('change', (e) => {
     if (!e.target.matches('[data-pub-prof]')) return;
     ui.pub.prof = e.target.value;

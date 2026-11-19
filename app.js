@@ -521,7 +521,27 @@
         <div class="filter-row" data-filter-group="prof">${filters.map(([id, l]) => `<button type="button" class="filter-btn" data-filter="${id}" aria-pressed="${ui.profFilter === id}">${l} <span class="count">${countOf(id)}</span></button>`).join('')}</div>
         <div class="prof-grid">${list.map(profCard).join('')}</div>
       </div>
+      ${(D.staff || []).length ? `<div>
+        ${sectionHead(tr('사업단 직원', 'Consortium Staff'))}
+        <div class="prof-grid">${D.staff.map(staffCard).join('')}</div>
+      </div>` : ''}
     </div></section>`;
+  }
+  // 사업단 직원 카드 – 교수 카드와 같은 모양 (상세 창 없이 사진·이름·소속·이메일)
+  function staffCard(s) {
+    const name = tr(s.name, s.nameEn || s.name);
+    return `<article class="prof-card staff-card" data-inst="${s.inst}">
+      <div class="photo-btn">
+        <img src="${photo(s.id)}" alt="${esc(name)}" loading="lazy" />
+        ${s.role ? `<span class="task-tag"><span>${esc(L(s, 'role'))}</span></span>` : ''}
+        <span class="inst-band bg-${s.inst}"></span>
+      </div>
+      <div class="body">
+        <h3>${esc(name)} ${tr(`<small>${esc(s.nameEn || '')}</small>`, '')}</h3>
+        <div class="aff">${esc(tr(`${INST[s.inst].univ} ${INST[s.inst].name}`, `${INST[s.inst].nameEn}, ${INST[s.inst].univEn}`))}</div>
+        ${s.email ? `<div class="actions"><a href="mailto:${esc(s.email)}">${ICON.mail} ${esc(s.email)}</a></div>` : ''}
+      </div>
+    </article>`;
   }
 
   // 구성원 이름: 한국어 모드는 ‘한글 + 영문’, 영어 모드는 영문만 (영문 이름이 없으면 한글)

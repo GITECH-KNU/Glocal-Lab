@@ -283,6 +283,13 @@ window.SITE_DATA = {
       pubs: [{ journal: 'IEEE Transactions on Control Systems Technology', year: 2026 }, { journal: 'Mechatronics', year: 2026 }] }
   ],
 
+  /* 사업단 직원 (구성원 › 참여 교수 페이지 맨 아래) – 사진은 assets/people/{id}.jpg
+   * 직책을 표시하려면 role: '…', roleEn: '…' 를 추가하세요 */
+  staff: [
+    { id: 'kang-suhyun', name: '강수현', nameEn: 'Suhyun Kang', inst: 'knu', email: '211963@kongju.ac.kr' },
+    { id: 'kim-seohyun', name: '김서현', nameEn: 'Seohyun Kim', inst: 'knu', email: '211961@kongju.ac.kr' }
+  ],
+
   /* 3대 연구 분야 */
   forms: [
     { id: 'M', name: '소재부품', en: 'Materials & Parts', inst: 'hanbat' },
